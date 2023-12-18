@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>eu.wdaqua.qanary</groupId>
 	<artifactId>qa.commons</artifactId>
-	<version>3.8.3</version>
+	<version>3.9.1</version>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -272,6 +272,51 @@
 		</repository>
 	</repositories>
 
+<!-- START - Setup for deployment to maven repository -->
+	<!-- -->
+
+	<!-- Project name, Description, URL --> <!-- TODO: Replace properties -->
+	<name>${project.groupId}:${project.artifactId}</name> <!--  Assembling name from project and artifact id-->
+	<description>**DESCRIPTION**</description>
+	<url>**URL**</url>
+
+	<!-- Set up distribution management (for maven deploy plugin) -->
+	<distributionManagement>
+		<repository>
+			<id>ossrh</id>
+			<name>Central Repository OSSRH</name>
+			<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
+
+	<!-- Source-Control-Management information (SCM) -->
+	<scm>
+		<connection>scm:git:git://github.com/WDAqua/Qanary.git</connection>
+		<developerConnection>scm:git:ssh://github.com/WDAqua/Qanary.git</developerConnection>
+		<url>https://github.com/WDAqua/Qanary</url>
+	</scm>
+
+	<!-- Developer information --> <!-- TODO: Replace properties -->
+	<developers>
+		<developer>
+			<name>**NAMEr**</name>
+			<email>**EMAIL**</email>
+			<organization>**ORGA**</organization>
+			<organizationUrl>**ORGA_URL**</organizationUrl>
+		</developer>
+	</developers>
+
+	<!-- Licence information --> <!-- TODO: Replace properties if necessary -->
+	<licenses>
+		<license>
+			<name>**The Apache License, Version 2.0**</name> <!-- Example for Apache2 Licence -->
+			<url>**http://www.apache.org/licenses/LICENSE-2.0.txt**</url> <!-- Example for Apache2 Licence -->
+		</license>
+	</licenses>
+
+	<!-- -->
+<!-- END - Setup for deployment to maven repository -->
+
 	<build>
 		<plugins>
 			<plugin>
@@ -299,7 +344,32 @@
 					</execution>
 				</executions>
 			</plugin>
-
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9.1</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<!--	For Component Cache Tests	-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
