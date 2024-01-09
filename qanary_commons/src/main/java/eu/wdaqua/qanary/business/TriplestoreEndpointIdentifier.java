@@ -36,7 +36,7 @@ public class TriplestoreEndpointIdentifier {
 	/**
 	 * if required by the configuration the endpoint URL is rewritten
 	 * 
-	 * @param url
+	 * @param uri
 	 * @return
 	 * @throws URISyntaxException 
 	 */
@@ -54,7 +54,7 @@ public class TriplestoreEndpointIdentifier {
 	/**
 	 * if required by the configuration the endpoint URL is rewritten
 	 * 
-	 * @param url
+	 * @param uri
 	 * @return
 	 * @throws URISyntaxException 
 	 */
@@ -70,7 +70,7 @@ public class TriplestoreEndpointIdentifier {
 	/**
 	 * if required by the configuration the endpoint URL is rewritten
 	 * 
-	 * @param url
+	 * @param uri
 	 * @return
 	 * @throws URISyntaxException 
 	 */
@@ -104,7 +104,7 @@ public class TriplestoreEndpointIdentifier {
 	/**
 	 * if required by the configuration the endpoint URL is rewritten
 	 * 
-	 * @param url
+	 * @param uri
 	 * @return
 	 * @throws URISyntaxException 
 	 */

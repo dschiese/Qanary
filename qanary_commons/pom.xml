@@ -2,20 +2,20 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>eu.wdaqua.qanary</groupId>
 	<artifactId>qa.commons</artifactId>
-	<version>3.9.1</version>
+	<version>3.9.2</version>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.6.7</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
 		<java.version>11</java.version>
-		<spring-boot-admin.version>2.7.10</spring-boot-admin.version>
+		<spring-boot-admin.version>2.7.12</spring-boot-admin.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
-		<jena.version>4.7.0</jena.version>
+		<jena.version>4.10.0</jena.version>
 		<stardog.version>[8.0.0,9.0.0)</stardog.version>
 		<mockito.version>4.4.0</mockito.version><!-- last working version -->
 	</properties>
@@ -227,7 +227,7 @@
 		<dependency>
 		    <groupId>com.openlinksw</groupId>
 		    <artifactId>virtjdbc4_3</artifactId>
-		    <version>3.122</version>
+		    <version>3.123</version>
 		</dependency>		
 		<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
 		<dependency>
@@ -250,12 +250,12 @@
 		<dependency>
 			<groupId>org.glassfish.jaxb</groupId>
 			<artifactId>jaxb-runtime</artifactId>
-			<version>4.0.2</version>
+			<version>4.0.4</version>
 		</dependency>
 		<dependency>
 			<groupId>jakarta.xml.bind</groupId>
 			<artifactId>jakarta.xml.bind-api</artifactId>
-			<version>4.0.0</version>
+			<version>4.0.1</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
 		<dependency>
@@ -379,6 +379,40 @@
 						<goals>
 							<goal>test-jar</goal>
 						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Plugin for deployment to OSSRH and release to central repository -->
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.7</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+				</configuration>
+			</plugin>
+			<!-- Plugin to sign the artifacts -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+						<configuration>
+							<gpgArguments>
+								<arg>--pinentry-mode</arg>
+								<arg>loopback</arg>
+							</gpgArguments>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
