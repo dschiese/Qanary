@@ -1,9 +1,6 @@
 package eu.wdaqua.qanary.commons.triplestoreconnectors;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URI;
 import java.util.stream.Collectors;
 
@@ -149,6 +146,11 @@ public abstract class QanaryTripleStoreConnector {
 
 		ParameterizedSparqlString pq = new ParameterizedSparqlString(sparqlQueryString, bindings);
 		Query query = QueryFactory.create(pq.toString());
+		try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("log.txt", true))) {
+			bufferedWriter.write(query.toString() + "\n" + "-------------------------------------" + "\n");
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
 		logger.info("generated query:\n{}", query.toString());
 
 		return query.toString();
@@ -222,6 +224,11 @@ public abstract class QanaryTripleStoreConnector {
 		if ((sparqlQueryString).contains("\nSELECT ") || sparqlQueryString.startsWith("SELECT")) {
 			Query query = QueryFactory.create(pq.toString());
 			logger.info("generated SELECT query:\n{}", query.toString());
+			try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("log.txt", true))) {
+				bufferedWriter.write(query.toString() + "\n" + "-------------------------------------" + "\n");
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
 			return query.toString();
 		} else if (sparqlQueryString.contains("\nASK ") || sparqlQueryString.startsWith("ASK")) {
 			Query query = QueryFactory.create(pq.toString());
