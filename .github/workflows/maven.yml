@@ -27,12 +27,9 @@ jobs:
         gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
     - name: Determine release list
-      run:
-        chmod +x ./service_config/version_check.sh
-        ./service_config/version_check.sh
+      run: bash -c ./service_config/version_check.sh
 
     - name: Check environment variable
       run: |
         echo "List of modules ${{ env.ARTIFACTS_TO_BE_RELEASED }}"
-        printenv ARTIFACTS_TO_BE_RELEASED
 
