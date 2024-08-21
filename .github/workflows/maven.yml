@@ -32,5 +32,5 @@ jobs:
         ./service_config/version_check.sh
 
     - name: List
-      run: echo $ARTIFACTS_TO_BE_RELEASED
+      run: echo "List of modules ${{ env.ARTIFACTS_TO_BE_RELEASED }}"
 
